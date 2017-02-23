@@ -11,6 +11,7 @@ from django.utils.http import urlquote
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
 
+import os
 import duo_web
 from six.moves.urllib.parse import urlencode
 
@@ -91,10 +92,10 @@ def login(request):
         context = {
             'message': message,
             'next': next_page,
-            'duo_css_src': '/'.join([settings.STATIC_URL,
-                                     'Duo-Frame.css']),
-            'duo_js_src': '/'.join([settings.STATIC_URL,
-                                     'Duo-Web-v2.js']),
+            'duo_css_src': os.path.join(settings.STATIC_URL,
+                                     'Duo-Frame.css'),
+            'duo_js_src': os.path.join(settings.STATIC_URL,
+                                     'Duo-Web-v2.js'),
             'duo_host': settings.DUO_HOST,
             'post_action': request.path,
             'sig_request': sig_request
